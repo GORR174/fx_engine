@@ -5,12 +5,12 @@ import ru.catstack.fx_engine.impl.GController;
 
 import java.net.URL;
 
-public class OtherWindow {
+public class ChildWindow {
     private Stage stage;
     private URL url;
     private GController controller;
 
-    public OtherWindow(Stage stage, URL url, GController controller) {
+    public ChildWindow(Stage stage, URL url, GController controller) {
         this.stage = stage;
         this.url = url;
         this.controller = controller;
