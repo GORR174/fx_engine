@@ -1,5 +1,8 @@
-package ru.catstack.fx_engine;
+package ru.catstack.fx_engine.resources;
 
+/**
+ * This class contains all application settings
+ */
 public class EngineConfig {
     public int width = 1280;
     public int height = 720;

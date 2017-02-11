@@ -1,12 +1,15 @@
-package ru.catstack.fx_engine;
+package ru.catstack.fx_engine.engine;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ru.catstack.fx_engine.impl.GController;
 import ru.catstack.fx_engine.impl.GApplication;
+import ru.catstack.fx_engine.impl.GController;
+import ru.catstack.fx_engine.resources.EngineConfig;
+import ru.catstack.fx_engine.resources.GApp;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,13 +36,14 @@ public class App extends Application {
         pStage = primaryStage;
 
         GApp.app = this;
-        main.onStart();
-
         updateSettings();
+
+        main.onStart();
+        pStage.show();
     }
 
     /**
-     * This method update settings from GApp.config
+     * This method update app settings from GApp.config
      */
     public void updateSettings() {
 
@@ -58,7 +62,27 @@ public class App extends Application {
         if(GApp.config.x != -777) pStage.setX(GApp.config.x);
         if(GApp.config.y != -777) pStage.setY(GApp.config.y);
 
-        pStage.show();
+    }
+
+    /**
+     * @param config this method update app settings from this config
+     */
+    public void updateSettings(EngineConfig config) {
+
+        pStage.setWidth(config.width);
+        pStage.setHeight(config.height);
+        pStage.setTitle(config.title);
+        pStage.setResizable(config.resizable);
+        pStage.setFullScreen(config.fullscreen);
+        pStage.setMaximized(config.maximized);
+        pStage.setAlwaysOnTop(config.alwaysOnTop);
+        pStage.setMaxWidth(config.maxWidth);
+        pStage.setMaxHeight(config.maxHeight);
+        pStage.setMinWidth(config.minWidth);
+        pStage.setMinHeight(config.minHeight);
+        pStage.setOpacity(config.opacity);
+        if(config.x != -777) pStage.setX(config.x);
+        if(config.y != -777) pStage.setY(config.y);
 
     }
 
@@ -102,11 +126,12 @@ public class App extends Application {
     }
 
     /**
-     * unsupported method
+     * This method add modal window
+     * @param isWait if isWait == true, the program will not be executed while this window will not close
      */
-    /*
-    public void addWindow(URL url, String title, Stage owner){
+    public void addModalWindow(URL url, String title, Stage owner, boolean isWait) throws Exception {
         try {
+            owner.show();
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             Parent root = fxmlLoader.load();
@@ -115,7 +140,10 @@ public class App extends Application {
             stage.initOwner(owner);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle(title);
-            stage.show();
+            if(isWait)
+                stage.showAndWait();
+            else
+                stage.show();
             GController controller = fxmlLoader.getController();
             childWindows.add(new ChildWindow(stage, url, controller));
             controller.onShow();
@@ -123,7 +151,6 @@ public class App extends Application {
             e.printStackTrace();
         }
     }
-    */
 
     /**
      * @param url close the window with this URL

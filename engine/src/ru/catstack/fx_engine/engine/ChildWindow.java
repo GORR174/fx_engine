@@ -1,4 +1,4 @@
-package ru.catstack.fx_engine;
+package ru.catstack.fx_engine.engine;
 
 import javafx.stage.Stage;
 import ru.catstack.fx_engine.impl.GController;
