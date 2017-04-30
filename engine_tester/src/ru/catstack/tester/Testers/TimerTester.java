@@ -1,18 +1,18 @@
-package ru.catstack.tester.engine;
+package ru.catstack.tester.testers;
 
 import ru.catstack.fx_engine.engine.App;
 import ru.catstack.fx_engine.impl.GApplication;
 import ru.catstack.fx_engine.resources.GApp;
-import ru.catstack.fx_engine.utility.Timer;
+import ru.catstack.fx_engine.time.Timer;
 
-public class Main extends GApplication {
+public class TimerTester implements GApplication{
 
     public static void main(String[] args) {
-        Main main = new Main();
+        TimerTester main = new TimerTester();
 
         main.config.width = 1280;
         main.config.height = 720;
-        main.config.title = "Engine Tester";
+        main.config.title = "Engine Timer Tester";
 
         new App(main);
     }
@@ -20,12 +20,12 @@ public class Main extends GApplication {
     @Override
     public void onStart() throws Exception {
         GApp.app.setScene(Main.class.getResource("/fxml/sample.fxml"));
-        GApp.app.addWindow(Main.class.getResource("/fxml/sample.fxml"), "1");
-        GApp.app.addWindow(Main.class.getResource("/fxml/sample.fxml"), "2");
-        GApp.app.addModalWindow(Main.class.getResource("/fxml/sample.fxml"), "3", GApp.app.getStage(), true);
-        GApp.app.closeAllWindows();
+
         Integer[] count = {0};
+
         Timer timer = new Timer(1, () -> {});
+
+        //every "TimeDuration"
         timer.setAction(() -> {
             System.out.println(timer.getCount());
             if(timer.getCount() == 10){
@@ -36,10 +36,12 @@ public class Main extends GApplication {
                 timer.setOnFinished(() -> System.out.println("Finish"));
             }
         });
+
         timer.setOnFinished(() -> {
             timer.run();
             System.out.println("Finished");
         });
+
         timer.runXTimes(3);
     }
 }

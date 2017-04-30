@@ -3,7 +3,7 @@ package ru.catstack.tester.controllers;
 import javafx.event.ActionEvent;
 import ru.catstack.fx_engine.impl.GController;
 
-public class SampleController extends GController {
+public class SampleController implements GController {
 
     @Override
     public void onShow() {

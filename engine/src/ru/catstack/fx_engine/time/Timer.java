@@ -1,4 +1,4 @@
-package ru.catstack.fx_engine.utility;
+package ru.catstack.fx_engine.time;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;

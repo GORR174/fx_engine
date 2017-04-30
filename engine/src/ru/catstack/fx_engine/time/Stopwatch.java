@@ -1,10 +1,11 @@
-package ru.catstack.fx_engine.utility;
+package ru.catstack.fx_engine.time;
 
 import javafx.util.Duration;
 
 public class Stopwatch {
     private Timer timer;
-    private float time = 0;
+    private float time = 0f;
+    private boolean isRunning = false;
 
     public Stopwatch(){
         timer = new Timer(Duration.millis(1), new Runnable() {
@@ -17,13 +18,19 @@ public class Stopwatch {
 
     public void startStopwatch(){
         timer.run();
+        isRunning = true;
     }
 
     public void stopStopwatch(){
         timer.stop();
+        isRunning = false;
     }
 
     public float getTime() {
         return time;
+    }
+
+    public boolean isRunning(){
+        return isRunning;
     }
 }

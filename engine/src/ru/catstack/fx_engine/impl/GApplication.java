@@ -2,7 +2,7 @@ package ru.catstack.fx_engine.impl;
 
 import ru.catstack.fx_engine.resources.EngineConfig;
 
-public abstract class GApplication {
-    public EngineConfig config = new EngineConfig();
-    public abstract void onStart() throws Exception;
+public interface GApplication {
+    EngineConfig config = new EngineConfig();
+    void onStart() throws Exception;
 }
